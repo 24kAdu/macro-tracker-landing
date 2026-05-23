@@ -10,7 +10,6 @@ const geist = Geist({
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const headlineLineOne = "Scan your meal.";
   const headlineLineTwo = "Know your macros.";
@@ -86,10 +85,7 @@ export default function Home() {
 
             <button
               type="button"
-              onClick={() => {
-                setIsSubmitted(false);
-                setIsModalOpen(true);
-              }}
+              onClick={() => setIsModalOpen(true)}
               className="mt-10 w-full border border-zinc-700 bg-black px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-white hover:bg-white hover:text-black sm:w-auto sm:text-base"
             >
               Get Instant Access — $4.99/mo
@@ -203,43 +199,18 @@ export default function Home() {
             className="w-full max-w-md rounded-2xl border border-white bg-[#09090b] p-7 text-center shadow-[0_0_80px_rgba(255,255,255,0.1)]"
             onClick={(event) => event.stopPropagation()}
           >
-            {isSubmitted ? (
-              <p className="text-xl font-semibold leading-8 text-white">
-                You're on the list. We'll be in touch.
-              </p>
-            ) : (
-              <>
-                <h2 className="text-3xl font-bold text-white">You're early.</h2>
-                <p className="mt-4 text-sm leading-6 text-zinc-400">
-                  Server spots are limited. Lock in 50% off for life.
-                </p>
+            <h2 className="text-3xl font-bold text-white">You're early.</h2>
+            <p className="mt-4 text-sm leading-6 text-zinc-400">
+              Server spots are limited. Lock in 50% off for life.
+            </p>
 
-                <form
-                  className="mt-7 space-y-3"
-                  onSubmit={(event) => {
-                    event.preventDefault();
-                    setIsSubmitted(true);
-                  }}
-                >
-                  <input
-                    type="email"
-                    required
-                    placeholder="Email address"
-                    className="w-full rounded-lg border border-zinc-700 bg-black px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-zinc-600 focus:border-white"
-                  />
-                  <button
-                    type="submit"
-                    className="w-full rounded-lg border border-white bg-white px-4 py-3 text-sm font-semibold text-black transition-colors hover:bg-zinc-200"
-                  >
-                    Join the Waitlist
-                  </button>
-                </form>
-
-                <p className="mt-4 text-xs text-zinc-500">
-                  No spam. Unsubscribe anytime.
-                </p>
-              </>
-            )}
+            <iframe
+              src="https://tally.so/embed/zx1QNM?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+              width="100%"
+              height="200"
+              frameBorder="0"
+              style={{ border: "none", background: "transparent" }}
+            />
           </motion.div>
         </div>
       ) : null}
