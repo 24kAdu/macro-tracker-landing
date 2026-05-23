@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useScroll } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Geist } from "next/font/google";
 import { CharacterV1 } from "@/components/ui/text-scroll-animation";
 
@@ -14,6 +14,11 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { scrollYProgress } = useScroll({ target: heroRef });
+  const headlineScrollProgress = useTransform(
+    scrollYProgress,
+    [0, 0.55],
+    [0.495, 0.5],
+  );
 
   const headlineLineOne = "Scan your meal.";
   const headlineLineTwo = "Know your macros.";
@@ -31,25 +36,27 @@ export default function Home() {
   const tags = [
     {
       text: "Grilled Chicken  32g protein",
-      className: "left-4 top-5",
-      dotClassName: "left-8 top-20",
+      className: "left-3 top-4 max-w-[140px] sm:top-5 sm:max-w-[150px]",
+      dotClassName: "left-8 top-16 sm:top-24",
     },
     {
       text: "Brown Rice  45g carbs",
-      className: "right-4 top-20",
-      dotClassName: "right-16 top-[118px]",
+      className: "right-3 top-14 max-w-[120px] sm:top-[78px] sm:max-w-[130px]",
+      dotClassName: "right-10 top-[92px] sm:right-12 sm:top-[122px]",
     },
     {
       text: "Broccoli  80 cal",
-      className: "left-8 top-[118px]",
-      dotClassName: "left-28 top-[98px]",
+      className: "left-6 top-[86px] max-w-[110px] sm:top-[122px] sm:max-w-[120px]",
+      dotClassName: "left-28 top-[72px] sm:top-[104px]",
     },
   ];
 
   return (
-    <main className={`${geist.className} min-h-screen bg-[#09090b]`}>
+    <main
+      className={`${geist.className} min-h-screen overflow-x-hidden bg-[#09090b]`}
+    >
       <div ref={heroRef} className="relative h-[210vh] bg-[#09090b]">
-        <div className="sticky top-0 flex min-h-screen flex-col items-center justify-center px-6 text-center">
+        <div className="sticky top-0 flex min-h-screen flex-col items-center justify-center px-4 text-center sm:px-6 lg:px-8">
           <div className="mx-auto flex w-full max-w-5xl flex-col items-center">
             <motion.div
               initial={{ y: 20, opacity: 0 }}
@@ -57,39 +64,45 @@ export default function Home() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="flex flex-col items-center"
             >
+              <p className="mx-auto mb-8 block w-full pt-12 text-center text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                Puretrack
+              </p>
+
               <p className="mb-6 border border-zinc-800 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">
                 No ads. No bloat. Just macros.
               </p>
 
-              <h1
-                className="max-w-4xl text-5xl font-bold leading-[0.95] tracking-normal text-white sm:text-7xl lg:text-8xl"
+              <div
+                className="w-full overflow-x-hidden px-4 text-center"
                 style={{ perspective: "500px" }}
               >
-                <span className="block">
-                  {headlineLineOne.split("").map((char, index) => (
-                    <CharacterV1
-                      key={`line-one-${char}-${index}`}
-                      char={char}
-                      index={index}
-                      centerIndex={headlineCenterIndex}
-                      scrollYProgress={scrollYProgress}
-                    />
-                  ))}
-                </span>
-                <span className="block">
-                  {headlineLineTwo.split("").map((char, index) => (
-                    <CharacterV1
-                      key={`line-two-${char}-${index}`}
-                      char={char}
-                      index={headlineLineOne.length + 1 + index}
-                      centerIndex={headlineCenterIndex}
-                      scrollYProgress={scrollYProgress}
-                    />
-                  ))}
-                </span>
-              </h1>
+                <h1 className="whitespace-nowrap text-center text-3xl font-bold leading-[0.95] tracking-normal text-white sm:text-6xl">
+                  <span className="block whitespace-nowrap">
+                    {headlineLineOne.split("").map((char, index) => (
+                      <CharacterV1
+                        key={`line-one-${char}-${index}`}
+                        char={char}
+                        index={index}
+                        centerIndex={headlineCenterIndex}
+                        scrollYProgress={headlineScrollProgress}
+                      />
+                    ))}
+                  </span>
+                  <span className="block whitespace-nowrap">
+                    {headlineLineTwo.split("").map((char, index) => (
+                      <CharacterV1
+                        key={`line-two-${char}-${index}`}
+                        char={char}
+                        index={headlineLineOne.length + 1 + index}
+                        centerIndex={headlineCenterIndex}
+                        scrollYProgress={headlineScrollProgress}
+                      />
+                    ))}
+                  </span>
+                </h1>
+              </div>
 
-              <p className="mt-7 max-w-2xl text-base leading-7 text-zinc-400 sm:text-xl">
+              <p className="mt-7 max-w-2xl text-balance px-2 text-base leading-7 text-zinc-400 sm:px-0 sm:text-xl">
                 The fastest macro tracker ever built. Type it or snap it —
                 done in 2 seconds.
               </p>
@@ -100,7 +113,7 @@ export default function Home() {
                   setIsSubmitted(false);
                   setIsModalOpen(true);
                 }}
-                className="mt-10 border border-zinc-700 bg-black px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-white hover:bg-white hover:text-black sm:text-base"
+                className="mt-10 w-full border border-zinc-700 bg-black px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-white hover:bg-white hover:text-black sm:w-auto sm:text-base"
               >
                 Get Instant Access — $4.99/mo
               </button>
@@ -110,9 +123,9 @@ export default function Home() {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
-              className="mt-16 rounded-[3rem] border border-zinc-700/80 bg-zinc-950 p-2 shadow-[0_0_80px_rgba(255,255,255,0.1)]"
+              className="mx-auto mt-8 w-full max-w-[320px] rounded-[2.5rem] border border-zinc-700/80 bg-zinc-950 p-2 shadow-[0_0_80px_rgba(255,255,255,0.1)] sm:mt-16 sm:rounded-[3rem]"
             >
-              <div className="relative h-[500px] w-[270px] overflow-hidden rounded-[2.5rem] border border-zinc-800 bg-[#0c0c0f] p-4 shadow-inner sm:h-[560px] sm:w-[310px]">
+              <div className="relative h-[390px] w-full overflow-hidden rounded-[2rem] border border-zinc-800 bg-[#0c0c0f] p-4 shadow-inner sm:h-[560px] sm:rounded-[2.5rem]">
                 <div className="absolute left-1/2 top-3 z-20 h-6 w-24 -translate-x-1/2 rounded-full bg-black" />
 
                 <div className="overflow-hidden rounded-t-[2rem]">
@@ -120,39 +133,44 @@ export default function Home() {
                     <img
                       src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300"
                       alt=""
-                      className="h-40 w-full rounded-t-[2rem] object-cover"
+                      className="h-28 w-full rounded-t-[1.5rem] object-cover sm:h-40 sm:rounded-t-[2rem]"
                     />
-                    <div className="absolute inset-0 rounded-t-[2rem] bg-black/15" />
+                    <div className="absolute inset-0 rounded-t-[1.5rem] bg-black/15 sm:rounded-t-[2rem]" />
 
                     {tags.map((tag, index) => (
-                      <motion.div
-                        key={tag.text}
-                        initial={{ y: 8, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{
-                          delay: 0.4 + index * 0.1,
-                          duration: 0.35,
-                          ease: "easeOut",
-                        }}
-                      >
-                        <span
-                          className={`absolute z-10 border border-white/20 bg-black/45 px-2.5 py-1 text-[10px] font-medium text-white shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur-md ${tag.className}`}
+                      <div key={tag.text}>
+                        <motion.span
+                          initial={{ y: 8, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          transition={{
+                            delay: 0.4 + index * 0.1,
+                            duration: 0.35,
+                            ease: "easeOut",
+                          }}
+                          className={`absolute z-10 border border-white/20 bg-black/45 px-2 py-1 text-xs font-medium leading-tight text-white shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur-md ${tag.className}`}
                         >
                           {tag.text}
-                        </span>
-                        <span
+                        </motion.span>
+                        <motion.span
+                          initial={{ scale: 0.6, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{
+                            delay: 0.4 + index * 0.1,
+                            duration: 0.35,
+                            ease: "easeOut",
+                          }}
                           className={`absolute z-10 h-2 w-2 rounded-full border border-white bg-white shadow-[0_0_14px_rgba(255,255,255,0.8)] ${tag.dotClassName}`}
                         />
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="mt-6 rounded-3xl border border-white/10 bg-white/[0.04] p-4 text-left backdrop-blur-xl">
-                  <div className="space-y-4">
+                <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-left text-sm backdrop-blur-xl sm:mt-6 sm:rounded-3xl sm:py-4">
+                  <div className="space-y-2.5 sm:space-y-4">
                     {macroBars.map((macro) => (
                       <div key={macro.label}>
-                        <div className="mb-2 flex items-center justify-between gap-4 text-xs">
+                        <div className="mb-1.5 flex items-center justify-between gap-4 text-sm sm:mb-2">
                           <span className="text-zinc-400">{macro.label}</span>
                           <span className="font-medium text-white">
                             {macro.value}
@@ -169,7 +187,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 border border-white/10 bg-zinc-950/90 px-4 py-3 text-left text-xs text-zinc-500 shadow-[0_0_40px_rgba(255,255,255,0.16)] backdrop-blur-xl sm:text-sm">
+                <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 border border-white/10 bg-zinc-950/90 px-3 py-2.5 text-left text-xs text-zinc-500 shadow-[0_0_40px_rgba(255,255,255,0.16)] backdrop-blur-xl sm:px-4 sm:py-3 sm:text-sm">
                   <span className="flex h-7 w-7 shrink-0 items-center justify-center border border-white/20 bg-white text-black shadow-[0_0_24px_rgba(255,255,255,0.45)]">
                     <svg
                       aria-hidden="true"
