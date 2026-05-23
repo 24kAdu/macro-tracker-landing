@@ -50,8 +50,8 @@ export default function Home() {
     <main
       className={`${geist.className} min-h-screen overflow-x-hidden bg-[#09090b]`}
     >
-      <div ref={heroRef} className="relative h-[210vh] bg-[#09090b]">
-        <div className="sticky top-0 flex flex-col items-center justify-center min-h-screen">
+      <div ref={heroRef} className="relative h-[150vh] bg-[#09090b]">
+        <div className="sticky top-0 min-h-screen flex flex-col items-center justify-center gap-6 px-4">
           <div className="mx-auto flex w-full max-w-5xl flex-col items-center px-4 text-center sm:px-6 lg:px-8">
             <motion.div
               initial={{ y: 20, opacity: 0 }}
