@@ -118,9 +118,9 @@ export default function Home() {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
-              className="mx-auto mt-8 w-full max-w-[320px] rounded-[2.5rem] border border-zinc-700/80 bg-zinc-950 p-2 shadow-[0_0_80px_rgba(255,255,255,0.1)] sm:mt-16 sm:rounded-[3rem]"
+              className="mx-auto mt-8 w-full max-w-[320px] rounded-[3rem] border border-zinc-700/80 bg-zinc-950 p-2 shadow-[0_0_80px_rgba(255,255,255,0.1)] sm:mt-16 sm:max-w-[380px]"
             >
-              <div className="relative h-[390px] w-full overflow-hidden rounded-[2rem] border border-zinc-800 bg-[#0c0c0f] p-4 shadow-inner sm:h-[560px] sm:rounded-[2.5rem]">
+              <div className="relative min-h-[600px] w-full overflow-hidden rounded-[3rem] border border-zinc-800 bg-[#0c0c0f] p-4 shadow-inner">
                 <div className="absolute left-1/2 top-3 z-20 h-6 w-24 -translate-x-1/2 rounded-full bg-black" />
 
                 <div className="overflow-hidden rounded-t-[2rem]">
@@ -128,9 +128,9 @@ export default function Home() {
                     <img
                       src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300"
                       alt=""
-                      className="h-28 w-full rounded-t-[1.5rem] object-cover sm:h-40 sm:rounded-t-[2rem]"
+                      className="h-48 w-full rounded-t-[2rem] object-cover sm:h-56"
                     />
-                    <div className="absolute inset-0 rounded-t-[1.5rem] bg-black/15 sm:rounded-t-[2rem]" />
+                    <div className="absolute inset-0 rounded-t-[2rem] bg-black/15" />
 
                     {tags.map((tag, index) => (
                       <div key={tag.text}>
@@ -161,7 +161,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-left text-sm backdrop-blur-xl sm:mt-6 sm:rounded-3xl sm:py-4">
+                <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-left text-sm backdrop-blur-xl sm:mt-6 sm:rounded-3xl">
                   <div className="space-y-2.5 sm:space-y-4">
                     {macroBars.map((macro) => (
                       <div key={macro.label}>
@@ -182,7 +182,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 border border-white/10 bg-zinc-950/90 px-3 py-2.5 text-left text-xs text-zinc-500 shadow-[0_0_40px_rgba(255,255,255,0.16)] backdrop-blur-xl sm:px-4 sm:py-3 sm:text-sm">
+                <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 border border-white/10 bg-zinc-950/90 px-3 py-3 text-left text-xs text-zinc-500 shadow-[0_0_40px_rgba(255,255,255,0.16)] backdrop-blur-xl sm:px-4 sm:text-sm">
                   <span className="flex h-7 w-7 shrink-0 items-center justify-center border border-white/20 bg-white text-black shadow-[0_0_24px_rgba(255,255,255,0.45)]">
                     <svg
                       aria-hidden="true"
