@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { Geist } from "next/font/google";
 import { CharacterV1 } from "@/components/ui/text-scroll-animation";
 
@@ -14,11 +14,6 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { scrollYProgress } = useScroll({ target: heroRef });
-  const headlineScrollProgress = useTransform(
-    scrollYProgress,
-    [0, 0.55],
-    [0.495, 0.5],
-  );
 
   const headlineLineOne = "Scan your meal.";
   const headlineLineTwo = "Know your macros.";
@@ -56,8 +51,8 @@ export default function Home() {
       className={`${geist.className} min-h-screen overflow-x-hidden bg-[#09090b]`}
     >
       <div ref={heroRef} className="relative h-[210vh] bg-[#09090b]">
-        <div className="sticky top-0 flex min-h-screen flex-col items-center justify-center px-4 text-center sm:px-6 lg:px-8">
-          <div className="mx-auto flex w-full max-w-5xl flex-col items-center">
+        <div className="sticky top-0 flex flex-col items-center justify-center min-h-screen">
+          <div className="mx-auto flex w-full max-w-5xl flex-col items-center px-4 text-center sm:px-6 lg:px-8">
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -84,7 +79,7 @@ export default function Home() {
                         char={char}
                         index={index}
                         centerIndex={headlineCenterIndex}
-                        scrollYProgress={headlineScrollProgress}
+                        scrollYProgress={scrollYProgress}
                       />
                     ))}
                   </span>
@@ -95,7 +90,7 @@ export default function Home() {
                         char={char}
                         index={headlineLineOne.length + 1 + index}
                         centerIndex={headlineCenterIndex}
-                        scrollYProgress={headlineScrollProgress}
+                        scrollYProgress={scrollYProgress}
                       />
                     ))}
                   </span>

@@ -15,8 +15,8 @@ type CharacterProps = {
 const CharacterV1 = ({ char, index, centerIndex, scrollYProgress }: CharacterProps) => {
   const isSpace = char === " ";
   const distanceFromCenter = index - centerIndex;
-  const x = useTransform(scrollYProgress, [0, 0.5], [distanceFromCenter * 20, 0]);
-  const rotateX = useTransform(scrollYProgress, [0, 0.5], [distanceFromCenter * 20, 0]);
+  const x = useTransform(scrollYProgress, [0, 0.5], [distanceFromCenter * 30, 0]);
+  const rotateX = useTransform(scrollYProgress, [0, 0.5], [distanceFromCenter * 30, 0]);
   return (
     <motion.span className={cn("inline-block text-white", isSpace && "w-4")} style={{ x, rotateX }}>
       {char}
