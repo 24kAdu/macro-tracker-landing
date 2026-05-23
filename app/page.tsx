@@ -13,7 +13,10 @@ export default function Home() {
   const heroRef = useRef<HTMLDivElement | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const { scrollYProgress } = useScroll({ target: heroRef });
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
 
   const headlineLineOne = "Scan your meal.";
   const headlineLineTwo = "Know your macros.";
@@ -50,8 +53,11 @@ export default function Home() {
     <main
       className={`${geist.className} min-h-screen overflow-x-hidden bg-[#09090b]`}
     >
-      <div ref={heroRef} className="relative h-[150vh] bg-[#09090b]">
-        <div className="sticky top-0 min-h-screen flex flex-col items-center justify-center gap-6 px-4">
+      <div
+        ref={heroRef}
+        className="relative h-[200vh] overflow-hidden bg-[#09090b]"
+      >
+        <div className="sticky top-0 flex h-screen flex-col items-center justify-center gap-6 overflow-hidden px-4">
           <div className="mx-auto flex w-full max-w-5xl flex-col items-center px-4 text-center sm:px-6 lg:px-8">
             <motion.div
               initial={{ y: 20, opacity: 0 }}
