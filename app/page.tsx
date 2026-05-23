@@ -1,28 +1,19 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useScroll } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { Geist } from "next/font/google";
-import { CharacterV1 } from "@/components/ui/text-scroll-animation";
 
 const geist = Geist({
   subsets: ["latin"],
 });
 
 export default function Home() {
-  const heroRef = useRef<HTMLDivElement | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
 
   const headlineLineOne = "Scan your meal.";
   const headlineLineTwo = "Know your macros.";
-  const headlineCenterIndex = Math.floor(
-    `${headlineLineOne} ${headlineLineTwo}`.length / 2,
-  );
 
   const macroBars = [
     { label: "Calories", value: "1,840/2,200", width: "84%" },
@@ -53,81 +44,70 @@ export default function Home() {
     <main
       className={`${geist.className} min-h-screen overflow-x-hidden bg-[#09090b]`}
     >
-      <div
-        ref={heroRef}
-        className="relative h-[200vh] overflow-hidden bg-[#09090b]"
-      >
-        <div className="sticky top-0 flex h-screen flex-col items-center justify-center gap-6 overflow-hidden px-4">
-          <div className="mx-auto flex w-full max-w-5xl flex-col items-center px-4 text-center sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="flex flex-col items-center"
-            >
-              <p className="mx-auto mb-8 block w-full pt-12 text-center text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                Puretrack
-              </p>
+      <section className="flex min-h-screen flex-col items-center justify-center bg-[#09090b] px-4 text-center sm:px-6 lg:px-8">
+        <div className="mx-auto flex w-full max-w-5xl flex-col items-center">
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex flex-col items-center"
+          >
+            <p className="mx-auto mb-8 block w-full pt-12 text-center text-2xl font-bold tracking-tight text-white sm:text-3xl">
+              Puretrack
+            </p>
 
-              <p className="mb-6 border border-zinc-800 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">
-                No ads. No bloat. Just macros.
-              </p>
+            <p className="mb-6 border border-zinc-800 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">
+              No ads. No bloat. Just macros.
+            </p>
 
-              <div
-                className="w-full overflow-x-hidden px-4 text-center"
-                style={{ perspective: "500px" }}
+            <h1 className="whitespace-nowrap text-center text-3xl font-bold leading-[0.95] tracking-normal text-white sm:text-6xl">
+              <motion.span
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="block whitespace-nowrap"
               >
-                <h1 className="whitespace-nowrap text-center text-3xl font-bold leading-[0.95] tracking-normal text-white sm:text-6xl">
-                  <span className="block whitespace-nowrap">
-                    {headlineLineOne.split("").map((char, index) => (
-                      <CharacterV1
-                        key={`line-one-${char}-${index}`}
-                        char={char}
-                        index={index}
-                        centerIndex={headlineCenterIndex}
-                        scrollYProgress={scrollYProgress}
-                      />
-                    ))}
-                  </span>
-                  <span className="block whitespace-nowrap">
-                    {headlineLineTwo.split("").map((char, index) => (
-                      <CharacterV1
-                        key={`line-two-${char}-${index}`}
-                        char={char}
-                        index={headlineLineOne.length + 1 + index}
-                        centerIndex={headlineCenterIndex}
-                        scrollYProgress={scrollYProgress}
-                      />
-                    ))}
-                  </span>
-                </h1>
-              </div>
-
-              <p className="mt-7 max-w-2xl text-balance px-2 text-base leading-7 text-zinc-400 sm:px-0 sm:text-xl">
-                The fastest macro tracker ever built. Type it or snap it —
-                done in 2 seconds.
-              </p>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setIsSubmitted(false);
-                  setIsModalOpen(true);
-                }}
-                className="mt-10 w-full border border-zinc-700 bg-black px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-white hover:bg-white hover:text-black sm:w-auto sm:text-base"
+                {headlineLineOne}
+              </motion.span>
+              <motion.span
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
+                className="block whitespace-nowrap"
               >
-                Get Instant Access — $4.99/mo
-              </button>
-            </motion.div>
+                {headlineLineTwo}
+              </motion.span>
+            </h1>
 
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
-              className="mx-auto mt-8 w-full max-w-[320px] rounded-[3rem] border border-zinc-700/80 bg-zinc-950 p-2 shadow-[0_0_80px_rgba(255,255,255,0.1)] sm:mt-16 sm:max-w-[380px]"
+            <p className="mt-7 max-w-2xl text-balance px-2 text-base leading-7 text-zinc-400 sm:px-0 sm:text-xl">
+              The fastest macro tracker ever built. Type it or snap it — done
+              in 2 seconds.
+            </p>
+
+            <button
+              type="button"
+              onClick={() => {
+                setIsSubmitted(false);
+                setIsModalOpen(true);
+              }}
+              className="mt-10 w-full border border-zinc-700 bg-black px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-white hover:bg-white hover:text-black sm:w-auto sm:text-base"
             >
-              <div className="relative min-h-[600px] w-full overflow-hidden rounded-[3rem] border border-zinc-800 bg-[#0c0c0f] p-4 shadow-inner">
-                <div className="absolute left-1/2 top-3 z-20 h-6 w-24 -translate-x-1/2 rounded-full bg-black" />
+              Get Instant Access — $4.99/mo
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="bg-[#09090b] px-4 pb-24 sm:px-6 lg:px-8">
+        <div className="mx-auto flex w-full max-w-5xl justify-center">
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
+            className="mx-auto mt-8 w-full max-w-[320px] rounded-[3rem] border border-zinc-700/80 bg-zinc-950 p-2 shadow-[0_0_80px_rgba(255,255,255,0.1)] sm:mt-16 sm:max-w-[380px]"
+          >
+            <div className="relative min-h-[600px] w-full overflow-hidden rounded-[3rem] border border-zinc-800 bg-[#0c0c0f] p-4 shadow-inner">
+              <div className="absolute left-1/2 top-3 z-20 h-6 w-24 -translate-x-1/2 rounded-full bg-black" />
 
                 <div className="overflow-hidden rounded-t-[2rem]">
                   <div className="relative">
@@ -206,11 +186,10 @@ export default function Home() {
                   </span>
                   <span>Describe your meal or upload a photo...</span>
                 </div>
-              </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
-      </div>
+      </section>
 
       {isModalOpen ? (
         <div
